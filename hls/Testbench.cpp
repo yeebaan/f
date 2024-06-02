@@ -22,51 +22,51 @@ void Testbench::feed_rgb() {
 	total_start_time = sc_time_stamp();
 	{
 	  rgb_t t{};
+      t.range(4 * 0 + 2, 4 * 0) = 0;
+      t.range(4 * 1 + 2, 4 * 1) = 1;
+      t.range(4 * 2 + 2, 4 * 2) = 2;
+      t.range(4 * 3 + 2, 4 * 3) = 0;
+      t.range(4 * 4 + 2, 4 * 4) = 1;
+	  o_rgb.put(t);
+	}
+	{
+	  rgb_t t{};
       t.range(4 * 0 + 2, 4 * 0) = 1;
       t.range(4 * 1 + 2, 4 * 1) = 2;
-      t.range(4 * 2 + 2, 4 * 2) = 3;
-      t.range(4 * 3 + 2, 4 * 3) = 1;
-      t.range(4 * 4 + 2, 4 * 4) = 2;
+      t.range(4 * 2 + 2, 4 * 2) = 1;
+      t.range(4 * 3 + 2, 4 * 3) = 2;
+      t.range(4 * 4 + 2, 4 * 4) = 4;
 	  o_rgb.put(t);
 	}
 	{
 	  rgb_t t{};
-      t.range(4 * 0 + 2, 4 * 0) = 2;
+      t.range(4 * 0 + 2, 4 * 0) = 1;
       t.range(4 * 1 + 2, 4 * 1) = 3;
+      t.range(4 * 2 + 2, 4 * 2) = 4;
+	  o_rgb.put(t);
+	}
+	{
+	  rgb_t t{};
+      t.range(4 * 1 + 2, 4 * 1) = 1;
       t.range(4 * 2 + 2, 4 * 2) = 2;
-      t.range(4 * 3 + 2, 4 * 3) = 3;
-      t.range(4 * 4 + 2, 4 * 4) = 5;
 	  o_rgb.put(t);
 	}
 	{
 	  rgb_t t{};
-      t.range(4 * 0 + 2, 4 * 0) = 2;
-      t.range(4 * 1 + 2, 4 * 1) = 4;
-      t.range(4 * 2 + 2, 4 * 2) = 5;
+      t.range(4 * 1 + 2, 4 * 1) = 1;
+      t.range(4 * 2 + 2, 4 * 2) = 2;
 	  o_rgb.put(t);
 	}
 	{
 	  rgb_t t{};
-      t.range(4 * 1 + 2, 4 * 1) = 2;
-      t.range(4 * 2 + 2, 4 * 2) = 3;
+      t.range(4 * 1 + 2, 4 * 1) = 1;
+      t.range(4 * 2 + 2, 4 * 2) = 2;
 	  o_rgb.put(t);
 	}
 	{
 	  rgb_t t{};
-      t.range(4 * 1 + 2, 4 * 1) = 2;
-      t.range(4 * 2 + 2, 4 * 2) = 3;
-	  o_rgb.put(t);
-	}
-	{
-	  rgb_t t{};
-      t.range(4 * 1 + 2, 4 * 1) = 2;
-      t.range(4 * 2 + 2, 4 * 2) = 3;
-	  o_rgb.put(t);
-	}
-	{
-	  rgb_t t{};
-      t.range(4 * 1 + 2, 4 * 1) = 2;
-      t.range(4 * 2 + 2, 4 * 2) = 3;
+      t.range(4 * 1 + 2, 4 * 1) = 1;
+      t.range(4 * 2 + 2, 4 * 2) = 2;
 	  o_rgb.put(t);
 	}
 	{

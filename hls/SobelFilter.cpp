@@ -23,7 +23,7 @@ void SobelFilter::do_filter()
     wait();
   }
   constexpr auto depth{8};
-  constexpr auto width{8};
+  constexpr auto width{16};
   std::array<std::array<sc_uint<4>, width>, depth> t{};
 #ifndef NATIVE_SYSTEMC
   HLS_FLATTEN_ARRAY(t);
@@ -36,7 +36,7 @@ void SobelFilter::do_filter()
     auto tmp{i_rgb.read()};
 #endif
     for (auto j{1u}; j < t[0].size(); j++) {
-      t[i][j] = tmp.range(4 * (j-1) + 2, 4 * (j-1));
+      t[i][j] = tmp.range(4 * (j-1) + 2, 4 * (j-1)) + 1;
     }
   }
   std::array<std::array<std::array<std::array<bool, 2>, 2>, width>, depth> u{};
