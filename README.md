@@ -3,7 +3,9 @@
 ## HLS steps to reproduce
 
 ```shell
-cd stratus
+git clone https://github.com/yeebaan/f.git
+source f/hls/source.sh
+cd f/hls/stratus
 make sim_B
 make sim_V_BASIC
 ```
