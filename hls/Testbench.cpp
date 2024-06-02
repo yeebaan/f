@@ -18,7 +18,6 @@ void Testbench::feed_rgb() {
 	o_rst.write(false);
 	wait();
 	o_rst.write(true);
-
 	constexpr auto n{3};
 	total_start_time = sc_time_stamp();
 	{
@@ -46,7 +45,7 @@ void Testbench::feed_rgb() {
 		t.range(n * (2 + 1) - 1, n * 2) = 4;
 		o_rgb.put(t);
 	}
-	if (1) {
+	{
 		rgb_t t{};
 		t.range(n * (1 + 1) - 1, n * 1) = 1;
 		t.range(n * (2 + 1) - 1, n * 2) = 2;
@@ -96,7 +95,7 @@ void Testbench::feed_rgb() {
 		t[4 * 2 + 3] = 1;
 		o_rgb.put(t);
 	}
-	if (1) {
+	{
 		rgb_t t{};
 		t[4 * 1 + 0] = 0;
 		t[4 * 1 + 1] = 0;
