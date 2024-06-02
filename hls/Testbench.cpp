@@ -19,7 +19,7 @@ void Testbench::feed_rgb() {
 	wait();
 	o_rst.write(true);
 
-	constexpr auto n{4};
+	constexpr auto n{3};
 	total_start_time = sc_time_stamp();
 	{
 		rgb_t t{};
@@ -46,10 +46,10 @@ void Testbench::feed_rgb() {
 		t.range(n * (2 + 1) - 1, n * 2) = 4;
 		o_rgb.put(t);
 	}
-	{
+	if (1) {
 		rgb_t t{};
-		t.range(4 * 1 + 3, 4 * 1) = 1;
-		t.range(4 * 2 + 3, 4 * 2) = 2;
+		t.range(n * (1 + 1) - 1, n * 1) = 1;
+		t.range(n * (2 + 1) - 1, n * 2) = 2;
 		o_rgb.put(t);
 	}
 	{
@@ -96,7 +96,7 @@ void Testbench::feed_rgb() {
 		t[4 * 2 + 3] = 1;
 		o_rgb.put(t);
 	}
-	{
+	if (1) {
 		rgb_t t{};
 		t[4 * 1 + 0] = 0;
 		t[4 * 1 + 1] = 0;
@@ -108,7 +108,7 @@ void Testbench::feed_rgb() {
 		t[4 * 2 + 3] = 1;
 		o_rgb.put(t);
 	}
-	for (auto i{0}; i < 10000; i++) {
+	for (auto i{0}; i < 128; i++) {
 		o_rgb.put(i);
 	}
 }
@@ -116,11 +116,11 @@ void Testbench::feed_rgb() {
 void Testbench::fetch_result() {
 	i_result.reset();
 	wait();
-	for (auto i{0}; i < 64; i++) {
+	for (auto i{0}; i < 16; i++) {
 		auto result{i_result.get()};
 		std::cout << std::bitset<2>(result.range(2, 1)) << ((i % 8 == 7) ? "\n" : " ");
 	}
 	std::cout << "00 01 01 10 01 10 10 11" << std::endl;
-	std::cout << sc_time_stamp() - total_start_time << " elapsed." << std::endl;
+	std::cout << sc_time_stamp() - total_start_time << " elapsed.";
 	sc_stop();
 }

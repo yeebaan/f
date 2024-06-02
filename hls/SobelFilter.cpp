@@ -24,7 +24,7 @@ void SobelFilter::do_filter()
   }
   constexpr auto depth{4};
   constexpr auto width{depth * 2};
-  constexpr auto n{4};
+  constexpr auto n{3};
   std::array<std::array<sc_uint<n>, width>, depth> t{};
   #ifndef NATIVE_SYSTEMC
     HLS_FLATTEN_ARRAY(t);
