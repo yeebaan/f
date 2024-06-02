@@ -1,7 +1,7 @@
 #include <bitset>
 #include "Testbench.h"
-
-Testbench::Testbench(sc_core::sc_module_name n) : sc_core::sc_module(n) {
+Testbench::Testbench(sc_core::sc_module_name n) : sc_core::sc_module(n)
+{
 	SC_THREAD(feed_rgb);
 	sensitive << i_clk.pos();
 	dont_initialize();
@@ -9,14 +9,14 @@ Testbench::Testbench(sc_core::sc_module_name n) : sc_core::sc_module(n) {
 	sensitive << i_clk.pos();
 	dont_initialize();
 }
-
-Testbench::~Testbench() {
+Testbench::~Testbench()
+{
 }
-
-void Testbench::feed_rgb() {
+void Testbench::feed_rgb()
+{
 	o_rgb.reset();
 	o_rst.write(false);
-	wait();
+	sc_core::wait();
 	o_rst.write(true);
 	constexpr auto n{3};
 	total_start_time = sc_time_stamp();
@@ -107,15 +107,17 @@ void Testbench::feed_rgb() {
 		t[4 * 2 + 3] = 1;
 		o_rgb.put(t);
 	}
-	for (auto i{0}; i < 128; i++) {
+	for (auto i{0}; i < (1 << 9); i++)
+	{
 		o_rgb.put(i);
 	}
 }
-
-void Testbench::fetch_result() {
+void Testbench::fetch_result()
+{
 	i_result.reset();
-	wait();
-	for (auto i{0}; i < 16; i++) {
+	sc_core::wait();
+	for (auto i{0}; i < (1 << 8); i++)
+	{
 		auto result{i_result.get()};
 		std::cout << std::bitset<2>(result.range(2, 1)) << ((i % 8 == 7) ? "\n" : " ");
 	}
