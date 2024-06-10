@@ -39,6 +39,8 @@ public:
 	static constexpr addr_t simple_dma_end_addr{0x03ffffff};
 	static constexpr addr_t sobel_filter_start_addr{0x04000000};
 	static constexpr addr_t sobel_filter_end_addr{0x04ffffff};
+	static constexpr addr_t sobel_filter_2_start_addr{0x05000000};
+	static constexpr addr_t sobel_filter_2_end_addr{0x05ffffff};
 
 	bool quiet = false;
 	bool use_E_base_isa = false;
@@ -75,8 +77,9 @@ int sc_main(int argc, char **argv) {
 	SimpleMemory mem("SimpleMemory", opt.mem_size);
 	ELFLoader loader(opt.input_program.c_str());
 	// SimpleBus<3, 3> bus("SimpleBus");
-	SimpleBus<4, 5> bus("SimpleBus");
+	SimpleBus<4, 6> bus("SimpleBus");
 	SobelFilter sobel_filter("SobelFilter");
+	SobelFilter sobel_filter_2("SobelFilter_2");
 	SimpleDMA simple_dma("SimpleDMA", 0);
 	PeripheralWriteConnector peripheral_write_connector("PeripheralWriteConnector");
 	SyscallHandler sys("SyscallHandler");
@@ -93,6 +96,7 @@ int sc_main(int argc, char **argv) {
 	bus.ports[2] = new PortMapping(opt.sys_start_addr, opt.sys_end_addr);
 	bus.ports[3] = new PortMapping(opt.simple_dma_start_addr, opt.simple_dma_end_addr);
 	bus.ports[4] = new PortMapping(opt.sobel_filter_start_addr, opt.sobel_filter_end_addr);
+	bus.ports[5] = new PortMapping(opt.sobel_filter_2_start_addr, opt.sobel_filter_2_end_addr);
 
 	loader.load_executable_image(mem, mem.size, opt.mem_start_addr);
 
@@ -122,6 +126,7 @@ int sc_main(int argc, char **argv) {
 	bus.isocks[2].bind(sys.tsock);
 	bus.isocks[3].bind(simple_dma.tsock);
 	bus.isocks[4].bind(sobel_filter.tsock);
+	bus.isocks[5].bind(sobel_filter_2.tsock);
 
 	simple_dma.isock.bind(peripheral_write_connector.tsock);
 
@@ -151,8 +156,8 @@ int sc_main(int argc, char **argv) {
 
 	sc_core::sc_start();
 	if (!opt.quiet) {
-		// core0.show();
-		// core1.show();
+		core0.show();
+		core1.show();
 	}
 
 	return 0;
